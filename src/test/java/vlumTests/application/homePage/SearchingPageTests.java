@@ -59,7 +59,7 @@ public class SearchingPageTests extends BaseTest {
         Thread.sleep(5000);
         waitHelper.waitUntilElementWillBeVisible(searchingPage.titleOfPageAfterSearch);
         String pageTitleAfterSearch = searchingPage.getPageTitleAfterSearch();
-        softAssert.assertEquals(pageTitleAfterSearch, "Top results", "Page title after search is not as expected");
+        softAssert.assertEquals(pageTitleAfterSearch, "Top results", "Page title after search isn't as expected");
         String searchResult = searchingPage.getTitleOfSearchResult();
         softAssert.assertEquals(searchResult, "ՀՈԼ");
         softAssert.assertAll();
