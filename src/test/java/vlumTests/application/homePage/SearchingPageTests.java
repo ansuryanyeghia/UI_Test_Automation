@@ -25,7 +25,7 @@ public class SearchingPageTests extends BaseTest {
         softAssert = new SoftAssert();
     }
 
-    @Test
+    @Test(priority = 1)
     public void singInAndGoToSearchPage() throws InterruptedException {
         softAssert.assertTrue(signInPage.signInPageIsLoaded(), "Sign in page is not loaded");
         Thread.sleep(5000);
@@ -42,7 +42,7 @@ public class SearchingPageTests extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(priority = 2)
     public void verifySearchPageElements() throws InterruptedException {
         softAssert.assertTrue(searchingPage.searchPageIsLoaded(), "Search page is not loaded");
         Thread.sleep(10000);
@@ -52,7 +52,7 @@ public class SearchingPageTests extends BaseTest {
         Thread.sleep(10000);
     }
 
-    @Test
+    @Test(priority = 3)
     public void verifySearchFunctionality() throws InterruptedException {
 
         searchingPage.enterTextInSearchField("ՀՈԼ");
@@ -62,6 +62,21 @@ public class SearchingPageTests extends BaseTest {
         softAssert.assertEquals(pageTitleAfterSearch, "Top results", "Page title after search isn't as expected");
         String searchResult = searchingPage.getTitleOfSearchResult();
         softAssert.assertEquals(searchResult, "ՀՈԼ");
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 4)
+    public void verifyPressOnTheSearchedResult() throws InterruptedException {
+        waitHelper.waitUntilElementWillBeVisible(searchingPage.titleOfPageAfterSearch);
+        String pageTitleAfterSearch = searchingPage.getPageTitleAfterSearch();
+        softAssert.assertEquals(pageTitleAfterSearch, "Top results", "Page title after search isn't as expected");
+        String searchResult = searchingPage.getTitleOfSearchResult();
+        softAssert.assertEquals(searchResult, "ՀՈԼ");
+        searchingPage.pressOnTheSearchedResult();
+        Thread.sleep(5000);
+        softAssert.assertEquals(driver.getCurrentUrl(), HomePageUrl.BOOK_PAGE_URL.getUrl());
+        String titleOfTheResultPage = searchingPage.getTitleOfTheResultPage();
+        softAssert.assertEquals(titleOfTheResultPage, "Հոլ");
         softAssert.assertAll();
     }
 }
