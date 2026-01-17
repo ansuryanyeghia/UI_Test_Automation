@@ -21,6 +21,9 @@ public class SearchingPage extends BasePage {
     public WebElement titleOfPageAfterSearch;
 
     @FindBy(xpath = "//div[@id='stackContainer1']//a[@id='stackBook10']//div//h4[@id='bookTitle0']")
+    public WebElement searchResultFromList;
+
+    @FindBy(xpath = "//h1[@class='book-title title-web title-style ng-star-inserted']")
     public WebElement searchResult;
 
 
@@ -44,6 +47,16 @@ public class SearchingPage extends BasePage {
     }
 
     public String getTitleOfSearchResult() {
+        waitHelper.waitUntilElementWillBeVisible(searchResultFromList);
+        return searchResultFromList.getText();
+    }
+
+    public void pressOnTheSearchedResult(){
+        waitHelper.waitForElementToBeClickable(searchResultFromList);
+        searchResultFromList.click();
+    }
+
+    public String getTitleOfTheResultPage() {
         waitHelper.waitUntilElementWillBeVisible(searchResult);
         return searchResult.getText();
     }
