@@ -9,6 +9,8 @@ import vlume.application.signIn.SignInPage;
 import vlume.provider.urlPrividers.homeUrl.HomePageUrl;
 import vlume.provider.urlPrividers.welcomeUrl.WelcomeUrl;
 
+import java.io.IOException;
+
 public class HomePageTests extends BaseTest {
 
     SignInPage signInPage;
@@ -23,11 +25,9 @@ public class HomePageTests extends BaseTest {
     }
 
     @Test
-    public void signInProcessWithValidCredentials() throws InterruptedException {
+    public void signInProcessWithValidCredentials() throws InterruptedException, IOException {
         signInPage.signInPageIsLoaded();
-        signInPage.enterEmail("gyumrisymphony@gmail.com");
-        signInPage.enterPassword("arm30Mozart");
-        signInPage.pressSignInButton();
+        signInPage.signIn();
         Thread.sleep(3000);
         softAssert.assertEquals(driver.getCurrentUrl(), WelcomeUrl.WELCOME_PAGE_URL.getUrl());
     }
