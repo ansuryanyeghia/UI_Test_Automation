@@ -28,7 +28,7 @@ public class SearchingPageTests extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void singInAndGoToSearchPage() throws InterruptedException, IOException {
+    public void singInAndGoToSearchPage() throws InterruptedException {
         softAssert.assertTrue(signInPage.signInPageIsLoaded(), "Sign in page is not loaded");
         Thread.sleep(5000);
         signInPage.signIn();
