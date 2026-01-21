@@ -10,6 +10,8 @@ import vlume.application.signIn.SignInPage;
 import vlume.provider.urlPrividers.homeUrl.HomePageUrl;
 import vlume.provider.urlPrividers.welcomeUrl.WelcomeUrl;
 
+import java.io.IOException;
+
 public class SearchingPageTests extends BaseTest {
     SignInPage signInPage;
     HomePage homePage;
@@ -29,9 +31,7 @@ public class SearchingPageTests extends BaseTest {
     public void singInAndGoToSearchPage() throws InterruptedException {
         softAssert.assertTrue(signInPage.signInPageIsLoaded(), "Sign in page is not loaded");
         Thread.sleep(5000);
-        signInPage.enterEmail("gyumrisymphony@gmail.com");
-        signInPage.enterPassword("arm30Mozart");
-        signInPage.pressSignInButton();
+        signInPage.signIn();
         Thread.sleep(5000);
         softAssert.assertEquals(driver.getCurrentUrl(), WelcomeUrl.WELCOME_PAGE_URL.getUrl());
         softAssert.assertTrue(homePage.homePageIsLoaded(), "Home page is not loaded");
