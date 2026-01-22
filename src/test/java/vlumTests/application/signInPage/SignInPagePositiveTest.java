@@ -1,13 +1,13 @@
 package vlumTests.application.signInPage;
 
+import application.homePage.HomePage;
+import application.signInPage.SignInPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
+import provider.UrlProvider;
 import vlumTests.baseTest.BaseTest;
-import vlume.application.homePage.HomePage;
-import vlume.application.signIn.SignInPage;
-import vlume.provider.urlPrividers.welcomeUrl.WelcomeUrl;
 
 import java.io.IOException;
 
@@ -18,19 +18,18 @@ public class SignInPagePositiveTest extends BaseTest {
 
     @BeforeMethod
     public void goToUrl() {
-        driver.get(WelcomeUrl.SIGN_IN_PAGE_URL.getUrl());
+        driver.get(UrlProvider.getSignInPageUrl());
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);
         softAssert = new SoftAssert();
     }
 
-    @Test
-    public void validateSignInProcess() throws InterruptedException, IOException {
+    @Test(groups = "Smock")
+    public void validateSignInProcess() throws IOException {
         signInPage.signInPageIsLoaded();
-        Thread.sleep(2000);
         signInPage.signIn();
         Assertion assertion = new Assertion();
-        Thread.sleep(10000);
-        assertion.assertEquals(driver.getCurrentUrl(), WelcomeUrl.WELCOME_PAGE_URL.getUrl());
+        homePage.homePageIsLoaded();
+        assertion.assertEquals(driver.getCurrentUrl(), UrlProvider.getWelcomePageUrl());
     }
 }

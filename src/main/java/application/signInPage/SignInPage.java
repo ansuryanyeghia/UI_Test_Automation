@@ -1,11 +1,11 @@
-package vlume.application.signIn;
+package application.signInPage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import vlume.basePage.BasePage;
-import vlume.models.User;
-import vlume.provider.userPrivider.UserProvider;
+import basePage.BasePage;
+import models.User;
+import provider.UserProvider;
 
 import java.io.IOException;
 

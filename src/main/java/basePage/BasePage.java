@@ -1,10 +1,10 @@
-package vlume.basePage;
+package basePage;
 
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import vlume.helper.WaitHelper;
+import helper.WaitHelper;
 
 public class BasePage {
 

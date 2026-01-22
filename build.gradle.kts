@@ -10,13 +10,22 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.seleniumhq.selenium:selenium-java:4.19.1")
-    testImplementation("org.testng:testng:7.10.2")
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.7.0")
+    implementation(platform("org.junit:junit-bom:5.10.0"))
+    implementation("org.junit.jupiter:junit-jupiter")
+    implementation("org.seleniumhq.selenium:selenium-java:4.19.1")
+    implementation("org.testng:testng:7.10.2")
+    implementation("io.github.bonigarcia:webdrivermanager:5.7.0")
 }
 
 tasks.test {
     useTestNG()
+}
+
+tasks.register<Test>("suiteTest") {
+    useTestNG{
+        suites("src/test/resources/regressionTests.xml")
+        suites("src/test/resources/smockTesting.xml")
+    }
+    testClassesDirs = sourceSets["test"].output.classesDirs
+    classpath = sourceSets["test"].runtimeClasspath
 }

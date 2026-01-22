@@ -1,7 +1,7 @@
-package vlume.provider.userPrivider;
+package provider;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import vlume.models.User;
+import models.User;
 
 import javax.imageio.IIOException;
 import java.io.File;
@@ -13,7 +13,7 @@ public class UserProvider {
     public User createValidUser() throws IOException {
 
         try {
-            File file = new File("src/main/resources/userData/valid_user_data.json");
+            File file = new File("src/main/resources/data/valid_user_data.json");
             ObjectMapper objectMapper = new ObjectMapper();
             user = objectMapper.readValue(file, User.class);
         } catch (IIOException e) {

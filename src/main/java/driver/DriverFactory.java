@@ -1,4 +1,4 @@
-package vlume.driver;
+package driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,6 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 public class DriverFactory {
-
     private ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
     @BeforeClass

@@ -1,14 +1,13 @@
 package vlumTests.application.homePage;
 
+import application.homePage.HomePage;
+import application.homePage.SearchingPage;
+import application.signInPage.SignInPage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import provider.UrlProvider;
 import vlumTests.baseTest.BaseTest;
-import vlume.application.homePage.HomePage;
-import vlume.application.homePage.SearchingPage;
-import vlume.application.signIn.SignInPage;
-import vlume.provider.urlPrividers.homeUrl.HomePageUrl;
-import vlume.provider.urlPrividers.welcomeUrl.WelcomeUrl;
 
 import java.io.IOException;
 
@@ -20,7 +19,7 @@ public class SearchingPageTests extends BaseTest {
 
     @BeforeClass
     public void goToUrl() {
-        driver.get(WelcomeUrl.SIGN_IN_PAGE_URL.getUrl());
+        driver.get(UrlProvider.getSignInPageUrl());
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);
         searchingPage = new SearchingPage(driver);
@@ -28,16 +27,15 @@ public class SearchingPageTests extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void singInAndGoToSearchPage() throws InterruptedException {
+    public void singInAndGoToSearchPage() throws IOException {
         softAssert.assertTrue(signInPage.signInPageIsLoaded(), "Sign in page is not loaded");
-        Thread.sleep(5000);
         signInPage.signIn();
-        Thread.sleep(5000);
-        softAssert.assertEquals(driver.getCurrentUrl(), WelcomeUrl.WELCOME_PAGE_URL.getUrl());
+        homePage.homePageIsLoaded();
+        softAssert.assertEquals(driver.getCurrentUrl(), UrlProvider.getWelcomePageUrl());
         softAssert.assertTrue(homePage.homePageIsLoaded(), "Home page is not loaded");
         homePage.pressOnTheSearchButton();
-        Thread.sleep(5000);
-        softAssert.assertEquals(driver.getCurrentUrl(), HomePageUrl.SEARCH_PAGE_URL.getUrl());
+        searchingPage.searchPageIsLoaded();
+        softAssert.assertEquals(driver.getCurrentUrl(), UrlProvider.getSearchPageUrl());
         softAssert.assertTrue(searchingPage.searchPageIsLoaded(), "Search page is not loaded");
         softAssert.assertAll();
     }
@@ -45,18 +43,15 @@ public class SearchingPageTests extends BaseTest {
     @Test(priority = 2)
     public void verifySearchPageElements() throws InterruptedException {
         softAssert.assertTrue(searchingPage.searchPageIsLoaded(), "Search page is not loaded");
-        Thread.sleep(10000);
         String pageTitle = searchingPage.getPageTitle();
         softAssert.assertEquals(pageTitle, "Categories", "Page title is not as expected");
         softAssert.assertAll();
-        Thread.sleep(10000);
     }
 
     @Test(priority = 3)
     public void verifySearchFunctionality() throws InterruptedException {
 
         searchingPage.enterTextInSearchField("ՀՈԼ");
-        Thread.sleep(5000);
         waitHelper.waitUntilElementWillBeVisible(searchingPage.titleOfPageAfterSearch);
         String pageTitleAfterSearch = searchingPage.getPageTitleAfterSearch();
         softAssert.assertEquals(pageTitleAfterSearch, "Top results", "Page title after search isn't as expected");
@@ -74,7 +69,7 @@ public class SearchingPageTests extends BaseTest {
         softAssert.assertEquals(searchResult, "ՀՈԼ");
         searchingPage.pressOnTheSearchedResult();
         Thread.sleep(5000);
-        softAssert.assertEquals(driver.getCurrentUrl(), HomePageUrl.BOOK_PAGE_URL.getUrl());
+        softAssert.assertEquals(driver.getCurrentUrl(), UrlProvider.getBookPageUrl());
         String titleOfTheResultPage = searchingPage.getTitleOfTheResultPage();
         softAssert.assertEquals(titleOfTheResultPage, "Հոլ");
         softAssert.assertAll();

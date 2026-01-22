@@ -1,4 +1,4 @@
-package vlume.models;
+package models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

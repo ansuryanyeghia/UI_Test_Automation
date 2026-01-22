@@ -1,13 +1,12 @@
 package vlumTests.application.homePage;
 
+import application.homePage.HomePage;
+import application.signInPage.SignInPage;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import provider.UrlProvider;
 import vlumTests.baseTest.BaseTest;
-import vlume.application.homePage.HomePage;
-import vlume.application.signIn.SignInPage;
-import vlume.provider.urlPrividers.homeUrl.HomePageUrl;
-import vlume.provider.urlPrividers.welcomeUrl.WelcomeUrl;
 
 import java.io.IOException;
 
@@ -18,21 +17,21 @@ public class HomePageTests extends BaseTest {
 
     @BeforeClass
     public void goToUrl() {
-        driver.get(WelcomeUrl.SIGN_IN_PAGE_URL.getUrl());
+        driver.get(UrlProvider.getSignInPageUrl());
         signInPage = new SignInPage(driver);
         homePage = new HomePage(driver);
         softAssert = new SoftAssert();
     }
 
     @Test
-    public void signInProcessWithValidCredentials() throws InterruptedException, IOException {
+    public void signInProcessWithValidCredentials() throws IOException {
         signInPage.signInPageIsLoaded();
         signInPage.signIn();
-        Thread.sleep(3000);
-        softAssert.assertEquals(driver.getCurrentUrl(), WelcomeUrl.WELCOME_PAGE_URL.getUrl());
+        homePage.homePageIsLoaded();
+        softAssert.assertEquals(driver.getCurrentUrl(), UrlProvider.getWelcomePageUrl());
     }
 
-    @Test
+    @Test(groups = "Smock")
     public void verifyHomePageElements() {
         waitHelper.waitUntilElementWillBeVisible(homePage.recentlyAddedPart);
         homePage.homePageIsLoaded();
@@ -45,6 +44,6 @@ public class HomePageTests extends BaseTest {
     public void verifyPressOnTheSeeMoreForRecentlyAddedPart() {
         waitHelper.waitForElementToBeClickable(homePage.seeMoreForRecentlyAddedPart);
         homePage.pressOnTheSeeMoreForRecentlyAddedPart();
-        softAssert.assertEquals(driver.getCurrentUrl(), HomePageUrl.RECENTLY_ADDED_URL.getUrl());
+        softAssert.assertEquals(driver.getCurrentUrl(), UrlProvider.getRecentlyAddedUrl());
     }
 }

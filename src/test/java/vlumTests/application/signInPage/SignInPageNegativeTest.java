@@ -1,12 +1,12 @@
 package vlumTests.application.signInPage;
 
+import application.signInPage.SignInPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
+import provider.UrlProvider;
 import vlumTests.baseTest.BaseTest;
-import vlume.application.signIn.SignInPage;
-import vlume.provider.urlPrividers.welcomeUrl.WelcomeUrl;
 
 public class SignInPageNegativeTest extends BaseTest {
 
@@ -14,7 +14,7 @@ public class SignInPageNegativeTest extends BaseTest {
 
     @BeforeMethod
     public void goToUrl() {
-        driver.get(WelcomeUrl.SIGN_IN_PAGE_URL.getUrl());
+        driver.get(UrlProvider.getSignInPageUrl());
         signInPage = new SignInPage(driver);
         softAssert = new SoftAssert();
     }
@@ -33,6 +33,6 @@ public class SignInPageNegativeTest extends BaseTest {
         String errorMessage = signInPage.getErrorMessage();
         softAssert.assertEquals(errorMessage, "Wrong credentials");
         Assertion assertion = new Assertion();
-        assertion.assertEquals(driver.getCurrentUrl(), WelcomeUrl.SIGN_IN_PAGE_URL);
+        assertion.assertEquals(driver.getCurrentUrl(), UrlProvider.getWelcomePageUrl());
     }
 }

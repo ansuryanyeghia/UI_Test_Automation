@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Regression Tests">
+
+    <test name="GeneralTest">
+        <classes>
+            <class name = "vlumTests.application.signInPage.SignInPagePositiveTest"/>
+            <class name = "vlumTests.application.homePage.HomePageTests"/>
+            <class name = "vlumTests.application.homePage.SearchingPageTests"/>
+        </classes>
+    </test>
+</suite>
+

@@ -1,10 +1,10 @@
-package vlume.application.homePage;
+package application.homePage;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import vlume.basePage.BasePage;
+import basePage.BasePage;
 
 public class SearchingPage extends BasePage {
 
