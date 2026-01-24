@@ -31,7 +31,7 @@ public class HomePageTests extends BaseTest {
         softAssert.assertEquals(driver.getCurrentUrl(), UrlProvider.getWelcomePageUrl());
     }
 
-    @Test(groups = "Smock")
+    @Test(groups = {"Smock"})
     public void verifyHomePageElements() {
         waitHelper.waitUntilElementWillBeVisible(homePage.recentlyAddedPart);
         homePage.homePageIsLoaded();

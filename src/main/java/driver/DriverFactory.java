@@ -4,17 +4,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
 
 public class DriverFactory {
     private ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
-    @BeforeClass
-    @Parameters("browser")
-    public void setupDriver(@Optional("Chrome") String browser) {
+    public void createDriver(String browser) {
         WebDriver driver;
         switch (browser.toLowerCase()) {
             case "chrome" -> {
@@ -35,12 +29,11 @@ public class DriverFactory {
         return this.driverThreadLocal.get();
     }
 
-    @AfterClass
     public void quitDriver() {
         WebDriver webDriver = this.driverThreadLocal.get();
         if (webDriver != null) {
             webDriver.quit();
+            driverThreadLocal.remove();
         }
     }
-
 }

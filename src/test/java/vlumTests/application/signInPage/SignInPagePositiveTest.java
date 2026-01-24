@@ -24,7 +24,7 @@ public class SignInPagePositiveTest extends BaseTest {
         softAssert = new SoftAssert();
     }
 
-    @Test(groups = "Smock")
+    @Test(groups = {"Smock"})
     public void validateSignInProcess() throws IOException {
         signInPage.signInPageIsLoaded();
         signInPage.signIn();
